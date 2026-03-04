@@ -1,7 +1,8 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function MainLayout({ children }) {
+    const { auth } = usePage().props;
     const [showingNavigationMenu, setShowingNavigationMenu] = useState(false);
     const [showingProdukDropdown, setShowingProdukDropdown] = useState(false);
     const [showingBisnisDropdown, setShowingBisnisDropdown] = useState(false);
@@ -132,13 +133,30 @@ export default function MainLayout({ children }) {
                                     )}
                                 </div>
                             ))}
-                            <div className="flex items-center">
-                                <Link
-                                    href="/mulai-belajar"
-                                    className="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none transition shadow-lg shadow-blue-200"
-                                >
-                                    Mulai Belajar
-                                </Link>
+                            <div className="flex items-center space-x-4">
+                                {auth.user ? (
+                                    <Link
+                                        href={route('dashboard')}
+                                        className="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none transition shadow-lg shadow-blue-200"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                ) : (
+                                    <>
+                                        <Link
+                                            href={route('login')}
+                                            className="text-sm font-bold text-gray-600 hover:text-blue-600 transition"
+                                        >
+                                            Masuk
+                                        </Link>
+                                        <Link
+                                            href={route('register')}
+                                            className="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none transition shadow-lg shadow-blue-200"
+                                        >
+                                            Daftar
+                                        </Link>
+                                    </>
+                                )}
                             </div>
                         </div>
 

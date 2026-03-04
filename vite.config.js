@@ -7,7 +7,7 @@ import path from 'path';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.jsx'],
+            input: 'resources/js/app.jsx',
             refresh: true,
         }),
         react(),
@@ -16,11 +16,6 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './resources/js'),
-        },
-    },
-    server: {
-        watch: {
-            ignored: ['**/storage/framework/views/**'],
         },
     },
 });
